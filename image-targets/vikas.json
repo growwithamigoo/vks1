@@ -1,0 +1,23 @@
+{
+  "type": "PLANAR",
+  "properties": {
+    "top": 0,
+    "left": 45,
+    "width": 1013,
+    "height": 1350,
+    "isRotated": false,
+    "originalWidth": 1080,
+    "originalHeight": 1350
+  },
+  "imagePath": "image-targets/vikas_luminance.png",
+  "metadata": null,
+  "name": "vikas",
+  "resources": {
+    "originalImage": "vikas_original.png",
+    "croppedImage": "vikas_cropped.png",
+    "thumbnailImage": "vikas_thumbnail.png",
+    "luminanceImage": "vikas_luminance.png"
+  },
+  "created": 1778055746702,
+  "updated": 1778062659524
+}
