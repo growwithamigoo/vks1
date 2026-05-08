@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>AR Video Tracking</title>
+  
+  <!-- 8th Wall Scripts -->
+  <!-- REPLACE "YOUR_APP_KEY" WITH YOUR ACTUAL 8TH WALL APP KEY -->
+  <script src="//apps.8thwall.com/xrweb?appKey=YOUR_APP_KEY"></script>
+  
+  <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+  <script src="//cdn.8thwall.com/web/aframe/aframe.min.js"></script>
+</head>
+<body>
+  <!-- WebAR Scene -->
+  <a-scene
+    xrweb
+    xrextras-loading
+    xrextras-runtime-error
+    xrextras-gesture-detector>
+    
+    <!-- Assets -->
+    <a-assets>
+      <video
+        id="vid"
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        preload="auto"
+        crossorigin="anonymous"
+        loop
+        muted
+        playsinline
+        webkit-playsinline>
+      </video>
+    </a-assets>
+    
+    <!-- Camera -->
+    <a-camera position="0 4 10" raycaster="objects: .cantap"></a-camera>
+
+    <!-- Image Target Entity -->
+    <a-entity xrextras-named-image-target="name: vikas" id="image-target">
+      <!-- Video Overlay -->
+      <a-video
+        src="#vid"
+        width="1"
+        height="0.6"
+        position="0 0 0"
+        rotation="0 0 0">
+      </a-video>
+    </a-entity>
+    
+  </a-scene>
+
+  <button id="startBtn"
+  style="
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:9999;
+  padding:15px 30px;
+  font-size:20px;">
+  Start AR
+  </button>
+
+  <script>
+  const video = document.querySelector('#vid')
+  const btn = document.querySelector('#startBtn')
+  const imageTarget = document.querySelector('#image-target')
+
+  btn.addEventListener('click', async () => {
+    try {
+      await video.play()
+      video.pause()
+      video.currentTime = 0
+
+      btn.style.display = 'none'
+
+      console.log('Unlocked')
+    } catch(e) {
+      console.log(e)
+    }
+  })
+
+  // Hooking to the correct image target element
+  imageTarget.addEventListener('xrimagefound', () => {
+    video.play()
+  })
+
+  imageTarget.addEventListener('xrimagelost', () => {
+    video.pause()
+  })
+  </script>
+</body>
+</html>
